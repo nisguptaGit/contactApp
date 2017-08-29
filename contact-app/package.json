@@ -1,0 +1,25 @@
+{
+  "name": "contact-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "immutable": "^3.8.1",
+    "react": "^15.6.1",
+    "react-bootstrap": "^0.31.2",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.6",
+    "react-scripts": "1.0.12",
+    "redux": "^3.7.2",
+    "redux-saga": "^0.15.6"
+  },
+  "scripts": {
+    "build-css": "node-sass src/ -o src/",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "node-sass": "^4.5.3"
+  }
+}
