@@ -3,7 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import * as actions from './actions';
 import {connect} from 'react-redux';
-import ContactList from './components/ContactList'
+import ContactList from './components/ContactList';
+import * as constants from './constants';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +17,7 @@ class App extends Component {
 
   }
   handleDeleteClick(event){
-    this.props.dispatch( event.target.value === 'Delete ALL Contacts'? actions.deleteAllContacts() : actions.deleteContact(event.target.name));
+    this.props.dispatch( event.target.value === constants.DELETE_ALL_CONTACTS_TEXT ? actions.deleteAllContacts() : actions.deleteContact(event.target.name));
   }
   componentWillReceiveProps(nextProps){
     this.setState({
@@ -26,16 +28,17 @@ class App extends Component {
     return <ContactList handleDeleteClick={this.handleDeleteClick} contactList={this.state.contacts} />
   }
   renderView(){
-    return this.props.fetching ? <h1> Loading </h1> : this.props.contacts.length===0 ? <h1> No Contacts <input
+    return this.props.fetching ? <h1> Loading </h1> : this.props.contacts.length===0 ? <h1> No Contacts
+          <input
             type="submit"
-            value="Fetch Contact"
+            value={constants.RELOAD_CONTACTS_TEXT}
             onClick={()=>{this.props.dispatch(actions.getContactsList())}}
           /> </h1> : this.renderContactListView()
   }
   render() {
     return (
       <div>
-      {this.renderView()}
+        {this.renderView()}
       </div>
     );
   }

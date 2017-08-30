@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import * as apis from '../apis';
 import * as utils from '../utils';
+import * as constants from '../constants';
+
 
 class ContactDetails extends Component {
   renderInfo (person) {
@@ -27,13 +29,13 @@ class ContactDetails extends Component {
         <div>
          <input
             type="submit"
-            value="Delete Contact"
+            value={constants.DELETE_CONTACT_TEXT}
             name={this.props.person.name}
             onClick={this.props.handleDeleteClick}
           />
           <input
             type="submit"
-            value="Delete ALL Contacts"
+            value={constants.DELETE_ALL_CONTACTS_TEXT}
             onClick={this.props.handleDeleteClick}
           />
           </div>

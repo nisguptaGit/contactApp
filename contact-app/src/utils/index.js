@@ -44,7 +44,8 @@ export const parseContactsResponse = function(response=dummy){
     }    
     var data = response.map((contact)=>{
       return {
-           name: contact.name.title + " " + contact.name.first + " " + contact.name.last, 
+           name: /*contact.name.title + " " +*/ contact.name.first + " " + contact.name.last, 
+           //name: contact.name.title + " " + contact.name.first + " " + contact.name.last, 
            phone: contact.phone,
            registered: contact.registered,
            dob: contact.dob,
@@ -57,12 +58,24 @@ export const parseContactsResponse = function(response=dummy){
            "login-password": contact.login.password,
            "id-name": contact.id.name,
            "id-value": contact.id.value
-           //Todo 
+           //Todo add more if required
 
       }
     })
     return data;
   }
+  export const SortByNameDescending = function (a, b) {
+      return SortByName(a, b, false );
+  }
+  export const SortByNameAscending = function (a, b) {
+      return SortByName(a, b, true);
+  }
+  
+  export const SortByName = function (a, b, isAscending=true) {
+      if (a.name < b.name) return (isAscending ? -1 : 1);
+      else if (a.name > b.name) return (isAscending ? 1 : -1);
+      return 0;
+    }
   export const capitalizeFirstLetter = function(string="") {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }

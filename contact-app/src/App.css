@@ -8,9 +8,17 @@ h1 {
   background: #dddddd;
   text-align: center;
 }
+h1 input {
+  height: 30px;
+  margin: 5px;
+  background: #00aa00;
+  color: #eeeeee;
+  font-size: 20px;
+  width: 95%; 
+}
 .app {
   height: 100%;
-  width: 100%;
+  width: 99%;
   display: flex;
   border: solid 2px #001C00;
 }
@@ -22,6 +30,11 @@ h1 {
   overflow: hidden;
 }
 .left input {
+  height: 30px;
+  margin: 5px;
+  width: 95%; 
+}
+.left select {
   height: 30px;
   margin: 5px;
   width: 95%; 
@@ -61,7 +74,7 @@ h1 {
   display: flex;
   flex-direction: column;
   color: #003300;
-  height: 500px;
+  height: 570px;
 }
 .contact-info header {
   flex: 1;
@@ -101,8 +114,11 @@ h1 {
   font-size: 30px;
 }
 .contact-info input {
+  margin-top: 10px;
   text-align: center;
-  background: #456789;
+  align-items: center;
+  background: #aa0000;
+  color: #eeeeee;
   font-size: 20px;
 }
 .contact-info section {

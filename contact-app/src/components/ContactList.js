@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ContactDetails from  './ContactDetails';
 import * as utils from '../utils';
+import * as constants from '../constants';
+
 class ContactList extends Component {
   constructor(props) {
     super(props);
@@ -8,27 +10,37 @@ class ContactList extends Component {
     this.state={
        person: cl[0],
        contactList: cl,
-       filterText: ''  
+       filterText: '',
+       sortType: constants.NONE
+  
     }    
+    this.handleSortOptionsChange = this.handleSortOptionsChange.bind(this);
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
   }
   componentWillReceiveProps(nextProps){
     var filterText = this.state.filterText;
+    var sortType = this.state.filterText;
     let cl = nextProps.contactList;
     this.setState({
       person: cl[0],
       contactList: cl,
-      filterText: filterText 
+      filterText: filterText,
+      sortType: sortType
     })
   }
   handleClick(contact) {
     this.setState({person: contact});
-  }
+  } 
   handleSearchTextChange(event){
     this.setState({filterText: event.currentTarget.value});
   }
+  handleSortOptionsChange(event){
+    this.setState({sortType: event.currentTarget.value});
+  }
   renderContactList(){
-    return (this.state.contactList.map(function(contact){
+    let contactList = this.state.contactList;
+    this.state.sortType === constants.NONE || (contactList = contactList.sort(this.state.sortType === constants.ASCENDING_ORDER ? utils.SortByNameAscending : utils.SortByNameDescending));
+    return (contactList.map(function(contact){
       var imageStyles = {
         backgroundImage: 'url(' + contact.image + ')'
       };
@@ -50,12 +62,18 @@ class ContactList extends Component {
   }
 
   render() {
+    var renderSortOptions = constants.getSortingOptions().map((option) => <option value={option}>{option}</option>) 
     return (
       <div className="app">
         <div className="left">
+         
+          <select onChange={this.handleSortOptionsChange} value={this.state.sortType}>
+            {renderSortOptions}
+          </select>
+
           <input
             type="text"
-            placeholder="Search Contact..."
+            placeholder={constants.SEARCH_CONTACT_TEXT}
             value={this.state.filterText}
             onChange={this.handleSearchTextChange}
           /> 
