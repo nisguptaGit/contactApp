@@ -3,9 +3,17 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Open Sans';
+  height:   100%;
+  background-image :linear-gradient(to right, rgb(251, 250, 251), rgb(245, 238, 218));
+}
+#root {
+  height: 100%;
+}
+div[data-reactroot] {
+  height: 100%;
+  padding: 10px;
 }
 h1 {
-  background: #dddddd;
   text-align: center;
 }
 h1 input {
@@ -17,42 +25,50 @@ h1 input {
   width: 95%; 
 }
 .app {
-  height: 100%;
+  height: 97%;
   width: 99%;
   display: flex;
   border: solid 2px #001C00;
 }
 .left {
-  background: #dddddd;
+  /* background: #dddddd; */
   flex: 1;
-  color: #0000000;
+  color: #000000;
   height: 100%;
   overflow: hidden;
+  
 }
 .left input {
-  height: 30px;
+  height: 35px;
+  width: calc(100% - 22px);
   margin: 5px;
-  width: 95%; 
+  padding: 5px;
+  font-family: 'Open Sans';
+  font-size: 1em
 }
 .left select {
-  height: 30px;
+  height: 35px;
   margin: 5px;
-  width: 95%; 
+  width: calc(100% - 10px); 
+  font-family: 'Open Sans';
+  font-size: 1em
 }
 .contacts-container {
-  height: 500px;
+  height: calc(100% - 120px);
   margin: 5px; 
   overflow: auto;
 }
 .contact {
   border-top: solid 2px #001C00;
-  background: #ffffff;
+  /* background: #ffffff; */
   height: 60px;
   display: flex;
   align-items: center;
   padding: 8px;
   cursor: pointer;
+
 }
+
 .contact .image {
   height: 60px;
   width: 60px;
@@ -65,16 +81,30 @@ h1 input {
   margin-left: 10px;
   min-width: 50px;
 }
+.contact:hover {
+  text-shadow: 1px 1px 2px black, 0 0 1em , 0 0 0.2em darkblue;
+  color: #f7f6f5;
+  background-color: rgb(250, 239, 223);
+
+}
+.selected {
+  text-shadow: 1px 1px 2px black, 0 0 1em , 0 0 0.2em darkblue;
+  color: #f7f6f5;
+  background-color: rgb(241, 225, 190)!important;
+
+} 
+
+
 .right {
-  background: #eeeeee;
+  /* background: #eeeeee; */
   flex: 3;
   border: solid 2px #001C00;
 }
 .contact-info {
   display: flex;
   flex-direction: column;
-  color: #003300;
-  height: 570px;
+  color: #123300;
+  height: 100%;
 }
 .contact-info header {
   flex: 1;
@@ -83,6 +113,7 @@ h1 input {
   justify-content: left;
   align-items: center;
   border: solid 2px #001C00;
+
 }
 .contact-info header .image {
   margin: 10px;
@@ -90,6 +121,7 @@ h1 input {
   width: 150px;
   margin-left: 50px;
   border-radius: 50%;
+  border-color: #001C00;
   background-position: -10px 0;
   background-size: cover;
 }
@@ -97,7 +129,7 @@ h1 input {
   display: inline-block;
   height: 100%;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.5);
+  /* background-color: rgba(255, 255, 255, 0.5); */
   border-radius: 50%;
   padding: 55px;
   box-sizing: border-box;
@@ -111,15 +143,22 @@ h1 input {
   margin: 0;
   text-align: center;
   margin-left: 20px;
-  font-size: 30px;
+  text-shadow: 1px 1px 2px black, 0 0 1em , 0 0 0.2em darkblue;
+  color: aliceblue;
+  font-size: -webkit-xxx-large;
 }
 .contact-info input {
-  margin-top: 10px;
+  margin: 10px;
   text-align: center;
   align-items: center;
-  background: #aa0000;
-  color: #eeeeee;
+  /* background: #aa0000; */
+  /* color: #eeeeee; */
   font-size: 20px;
+  color: rgb(92, 92, 92);
+  background-color: #fa544e;
+  background-image: linear-gradient(-180deg, rgb(241, 186, 135) 0%, rgb(241, 204, 148) 90%);
+  color: rgb(255, 255, 255)
+
 }
 .contact-info section {
   flex: 1;
@@ -134,5 +173,9 @@ table {
 td {
   padding: 10px;
   margin: 5px;
-  border-bottom: solid 2px #aaaaaa
-;}
+  border-bottom: solid 2px #aaaaaa;
+}
+
+div.button-container {
+  align-self: center;
+}
