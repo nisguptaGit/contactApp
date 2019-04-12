@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ContactDetails from  './ContactDetails';
 import * as utils from '../utils';
 import * as constants from '../constants';
+import PropTypes from 'prop-types'
 
 class ContactList extends Component {
   constructor(props) {
@@ -9,10 +10,9 @@ class ContactList extends Component {
     let cl = this.props.contactList;
     this.state={
        person: cl[0],
-       contactList: cl,
+      // contactList: cl,
        filterText: '',
        sortType: constants.NONE
-  
     }    
     this.handleSortOptionsChange = this.handleSortOptionsChange.bind(this);
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
@@ -23,7 +23,7 @@ class ContactList extends Component {
     let cl = nextProps.contactList;
     this.setState({
       person: cl[0],
-      contactList: cl,
+     // contactList: cl,
       filterText: filterText,
       sortType: sortType
     })
@@ -38,22 +38,20 @@ class ContactList extends Component {
     this.setState({sortType: event.currentTarget.value});
   }
   renderContactList(){
-    let contactList = this.state.contactList;
+    //let contactList = this.state.contactList;
+    let contactList = this.props.contactList;
     this.state.sortType === constants.NONE || (contactList = contactList.sort(this.state.sortType === constants.ASCENDING_ORDER ? utils.SortByNameAscending : utils.SortByNameDescending));
-    return (contactList.map(function(contact){
+    return (contactList.map(function(contact, index){
       var imageStyles = {
         backgroundImage: 'url(' + contact.image + ')'
       };
-      var contactStyles = {
-        backgroundColor: contact === this.state.person ? '#0011ff' : '',
-        color: contact === this.state.person ? '#ffffff' : ''
-      }
 
       if (contact.name.toLowerCase().indexOf(this.state.filterText.toLowerCase()) === -1) {
-        return;
+        return null;
       }
+      let classNames =  (contact === this.state.person ? 'selected ' : '') + "contact "
       return (
-        <div className="contact" onClick={this.handleClick.bind(this, contact)} style={contactStyles}>
+        <div className={classNames} key={index} onClick={this.handleClick.bind(this, contact)} >
           <span className="image" style={imageStyles}></span>
           <span className="name">{utils.toTitleCase(contact.name)}</span>
         </div>
@@ -62,7 +60,7 @@ class ContactList extends Component {
   }
 
   render() {
-    var renderSortOptions = constants.getSortingOptions().map((option) => <option value={option}>{option}</option>) 
+    var renderSortOptions = constants.getSortingOptions().map((option, index) => <option key={index} value={option}>{option}</option>) 
     return (
       <div className="app">
         <div className="left">
@@ -87,5 +85,10 @@ class ContactList extends Component {
       </div>
     );
   }
+}
+
+ContactList.propTypes = {
+  contactList: PropTypes.array,
+  handleDeleteClick: PropTypes.func
 }
 export default ContactList;
