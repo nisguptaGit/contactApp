@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import * as apis from '../apis';
 import * as utils from '../utils';
+import PropTypes from 'prop-types'
+
 import * as constants from '../constants';
 
 
 class ContactDetails extends Component {
   renderInfo (person) {
     let keys = Object.keys(person);
-    keys = keys.filter((key) => { return (key !== 'name' && key !== 'image')  })
+    keys = keys.filter((key, index) => { return (key !== 'name' && key !== 'image')  })
       return (keys.map((key, index) => {
-        return <tr><td><strong>{key.toUpperCase()}: </strong> </td><td>{person[key]}</td></tr>
+        return <tr key={index}><td><strong>{key.toUpperCase()}: </strong> </td><td>{person[key]}</td></tr>
     }));
   };
     
@@ -26,7 +28,7 @@ class ContactDetails extends Component {
         <section>
           <table><tbody>{this.renderInfo(this.props.person)}</tbody></table>
         </section>
-        <div>
+        <div className="button-container">
          <input
             type="submit"
             value={constants.DELETE_CONTACT_TEXT}
@@ -44,5 +46,10 @@ class ContactDetails extends Component {
     );
   }
 };
+
+ContactDetails.propTypes = {
+  handleDeleteClick: PropTypes.func,
+  person: PropTypes.object
+}
 
 export default ContactDetails;
