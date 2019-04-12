@@ -7,11 +7,11 @@ export function getContactsList() {
 }
 
 export function getContactsListSuccess(res) {
- // alert(JSON.stringify(res))
+  // alert(JSON.stringify(res))
   return {
     type: constants.GET_ALL_CONTACTS_SUCCESS,
     data: utils.parseContactsResponse(res.results)
-    };
+  };
 }
 
 export function getContactsListFails(error) {
@@ -20,7 +20,7 @@ export function getContactsListFails(error) {
   return {
     type: constants.GET_ALL_CONTACTS_FAILS,
     error: error
-    };
+  };
 }
 
 export function getContact() {
@@ -42,6 +42,12 @@ export function getContactFails(error) {
     error: error
   };
 }
+export function deleteContactOperation(name) {
+  return {
+    type: constants.DELETE_CONTACT_OPERATION,
+    data: name
+  };
+}
 export function deleteContact(name) {
   return {
     type: constants.DELETE_CONTACT,
@@ -51,8 +57,6 @@ export function deleteContact(name) {
 
 export function deleteAllContacts() {
   return {
-    type: constants.DELETE_ALL_CONTACTS,
+    type: constants.DELETE_ALL_CONTACTS
   };
 }
-
-
